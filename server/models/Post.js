@@ -91,6 +91,14 @@ PostSchema.methods.addComment = function (userId, content) {
   return this.save();
 };
 
+// Add static method for slug generation
+PostSchema.statics.generateSlug = function (title) {
+  return title
+    .toLowerCase()
+    .replace(/[^\w ]+/g, '')
+    .replace(/ +/g, '-');
+};
+
 // Method to increment view count
 PostSchema.methods.incrementViewCount = function () {
   this.viewCount += 1;
