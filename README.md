@@ -146,23 +146,108 @@ The frontend application will start on `http://localhost:5173` (or another avail
 └── README.md               # Project overview and instructions
 ```
 # project images
-  # main page(index)
-  <img src="/images/home.png" style="padding:10px;martin-top:20px; width:100%"></a>
-   
-   # blog page forvisitors
- <img src="/images/blog.png" style="padding:10px;martin-top:20px; width:100%"></a>
 
-   # login page
- <img src="/images/login.png" style="padding:10px;martin-top:20px; width:100%"></a>
+### Main Page (Index)
+![Main Page](/images/home.png)
 
-#  dasboard for authenitated user
-  <img src="/images/role.png" style="padding:10px;martin-top:20px; width:100%"></a>
+### Blog Page for Visitors
+![Blog Page](/images/blog.png)
 
-# comments
-   <img src="/images/comments.png" style="padding:10px;martin-top:20px; width:100%"></a>
+### Login Page
+![Login Page](/images/login.png)
 
-  # admin dashbord 
-   <img src="/images/admin.png" style="padding:10px;martin-top:20px; width:100%"></a>
+### Dashboard for Authenticated User
+![User Dashboard](/images/role.png)
+
+### Comments Section
+![Comments](/images/comments.png)
+
+### Admin Dashboard
+![Admin Dashboard](/images/admin.png)
+
+## 📖 API Documentation
+
+The backend API is built with Node.js and Express.js, providing a RESTful interface for managing users, posts, categories, and comments. All API endpoints are prefixed with `/api`.
+
+### Authentication
+
+*   **`POST /api/auth/register`**
+    *   Registers a new user.
+    *   **Request Body**: `{ "username": "...", "email": "...", "password": "..." }`
+    *   **Response**: `{ "success": true, "token": "...", "user": { "_id": "...", "username": "...", "email": "...", "role": "user" } }`
+
+*   **`POST /api/auth/login`**
+    *   Logs in an existing user.
+    *   **Request Body**: `{ "email": "...", "password": "..." }`
+    *   **Response**: `{ "success": true, "token": "...", "user": { "_id": "...", "username": "...", "email": "...", "role": "user" } }`
+
+*   **`GET /api/auth/profile`**
+    *   Retrieves the profile of the authenticated user.
+    *   **Requires**: JWT in `Authorization` header (`Bearer <token>`).
+    *   **Response**: `{ "success": true, "user": { "_id": "...", "username": "...", "email": "...", "role": "..." } }`
+
+### Users
+
+*   **`GET /api/users/:id`**
+    *   Get user by ID.
+
+### Posts
+
+*   **`GET /api/posts`**
+    *   Retrieves all blog posts.
+    *   **Response**: `{ "success": true, "count": ..., "total": ..., "pages": ..., "currentPage": ..., "data": [...] }`
+
+*   **`GET /api/posts/:slugOrId`**
+    *   Retrieves a single blog post by slug or ID.
+    *   **Response**: `{ "success": true, "data": { ...postData... } }`
+
+*   **`POST /api/posts`**
+    *   Creates a new blog post.
+    *   **Requires**: JWT in `Authorization` header, authenticated user.
+    *   **Request Body**: `{ "title": "...", "content": "...", "category": "...", "tags": [], "image": "..." }`
+    *   **Response**: `{ "success": true, "message": "Post created successfully", "data": { ...newPostData... } }`
+
+*   **`PUT /api/posts/:id`**
+    *   Updates an existing blog post.
+    *   **Requires**: JWT in `Authorization` header, user is post author or admin.
+    *   **Request Body**: `{ "title": "...", "content": "...", "category": "...", "tags": [], "image": "..." }` (partial updates supported)
+    *   **Response**: `{ "success": true, "message": "Post updated successfully", "data": { ...updatedPostData... } }`
+
+*   **`DELETE /api/posts/:id`**
+    *   Deletes a blog post.
+    *   **Requires**: JWT in `Authorization` header, user is post author or admin.
+    *   **Response**: `{ "success": true, "message": "Post removed" }`
+
+### Categories
+
+*   **`GET /api/categories`**
+    *   Retrieves all categories.
+    *   **Response**: `{ "success": true, "count": ..., "data": [...] }`
+
+*   **`POST /api/categories`**
+    *   Creates a new category.
+    *   **Requires**: JWT in `Authorization` header, user must be an admin.
+    *   **Request Body**: `{ "name": "...", "description": "..." }`
+    *   **Response**: `{ "success": true, "message": "Category created successfully", "data": { ...newCategoryData... } }`
+
+*   **`PUT /api/categories/:id`**
+    *   Updates a category.
+    *   **Requires**: JWT in `Authorization` header, user must be an admin.
+    *   **Request Body**: `{ "name": "...", "description": "..." }` (partial updates supported)
+    *   **Response**: `{ "success": true, "message": "Category updated successfully", "data": { ...updatedCategoryData... } }`
+
+*   **`DELETE /api/categories/:id`**
+    *   Deletes a category.
+    *   **Requires**: JWT in `Authorization` header, user must be an admin.
+    *   **Response**: `{ "success": true, "message": "Category removed" }`
+
+### Comments
+
+*   **`POST /api/posts/:postId/comments`**
+    *   Adds a comment to a specific post.
+    *   **Requires**: JWT in `Authorization` header, authenticated user.
+    *   **Request Body**: `{ "text": "..." }`
+    *   **Response**: `{ "success": true, "message": "Comment added successfully", "data": { ...newCommentData... } }`
 
 ## 🤝 Contributing
 
