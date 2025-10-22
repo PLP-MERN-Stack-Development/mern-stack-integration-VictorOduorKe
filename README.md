@@ -145,6 +145,24 @@ The frontend application will start on `http://localhost:5173` (or another avail
 │   └── package.json
 └── README.md               # Project overview and instructions
 ```
+# project images
+  # main page(index)
+  <img src="/images/home.png" style="padding:10px;martin-top:20px; width:100%"></a>
+   
+   # blog page forvisitors
+ <img src="/images/blog.png" style="padding:10px;martin-top:20px; width:100%"></a>
+
+   # login page
+ <img src="/images/login.png" style="padding:10px;martin-top:20px; width:100%"></a>
+
+#  dasboard for authenitated user
+  <img src="/images/role.png" style="padding:10px;martin-top:20px; width:100%"></a>
+
+# comments
+   <img src="/images/comments.png" style="padding:10px;martin-top:20px; width:100%"></a>
+
+  # admin dashbord 
+   <img src="/images/admin.png" style="padding:10px;martin-top:20px; width:100%"></a>
 
 ## 🤝 Contributing
 
