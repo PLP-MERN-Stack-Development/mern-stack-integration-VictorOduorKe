@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await api.authService.login(email, password);
-      console.log("AuthContext: Login response:", response);
       localStorage.setItem('token', response.token);
       setUser(response); // Corrected from response.data to response
       notify("Logged in successfully!", "success");

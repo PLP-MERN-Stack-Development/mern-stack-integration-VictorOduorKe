@@ -9,7 +9,6 @@ const createDbConnection = require("./config/db");
 const userRoutes = require("./routes/userRoute");
 const postRoutes=require("./routes/postRoute");
 const categoryRoutes=require("./routes/categoryRoutes")
-const seedCategories=require("./seeds/seedCategory")
 // Load environment variables
 dotenv.config();
 
@@ -21,7 +20,7 @@ createDbConnection();
 
 // Middleware
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
@@ -36,7 +35,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // ... your other imports and middleware ...
 
 // Routes
-//seedCategories()
 app.use("/users", userRoutes);
 app.use("/posts",postRoutes);
 app.use("/categories",categoryRoutes)
